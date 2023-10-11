@@ -1,0 +1,19 @@
+/* Styling for FrontPageComponent container */
+.front-page-container {
+    display: flex;
+    flex-direction: column;
+    /* Arrange children vertically */
+    align-items: flex-start;
+    /* Align children to the right */
+    justify-content: flex-start;
+    /* Ensure the container takes up the full viewport height */
+    padding: 20px;
+    /* Add padding for spacing */
+}
+
+app-remarks {
+    margin-top: auto;
+        /* Push the table to the bottom */
+        margin-right: auto;
+        /* Push the table to the right */
+}
