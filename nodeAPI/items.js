@@ -43,7 +43,7 @@ async function getCategories(page = 1) {
         meta
     }
 }
-async function creatItem(page = 1) {
+async function createItem(page = 1) {
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(
         `SELECT kategoriId, enhedsType
