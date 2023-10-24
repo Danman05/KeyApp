@@ -1,45 +1,39 @@
+<select id="itemSelector" #selectElement [(ngModel)]="selectorValue" (ngModelChange)="selectorValueChanged()">
+    <option disabled selected>Tilføj bemærkninger</option>
+    <option value="Dimension">Dimensioner</option>
+    <option value="Weight">Vægt</option>
+    <option value="Brand">Mærke</option>
+    <option value="userDefined">bruger defineret</option>
+    <!-- Add more items as needed -->
+</select>
+<ng-container *ngIf="dataRows.length > 0">
+    <p><strong class="errorLabel">{{statusLabel}}</strong></p>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Værdi</th>
+                <th>Fjern</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of dataRows; let i = index">
+                <td class="data-row">
+                    <ng-container *ngIf="row.editableAttr">
 
-    <select id="itemSelector" #selectElement [(ngModel)]="selectorValue" (ngModelChange)="selectorValueChanged()">
-        <option value="" disabled selected>Tilføj bemærkninger</option>
-        <option value="Dimension">Dimensioner</option>
-        <option value="Weight">Vægt</option>
-        <option value="userDefined">bruger defineret</option>
-        <!-- Add more items as needed -->
-    </select>
-    <ng-container *ngIf="dataRows.length > 0">
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th>Navn</th>
-                    <th>Værdi</th>
-                    <th>Button</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let row of dataRows; let i = index">
-                    <td class="data-row">
-                        <ng-container *ngIf="row.editableAttr">
-                            
-                            <input type="text" [(ngModel)]="dataRows[i].nonEditable" (blur)="valueChanged($event)"
-                            (keyup.enter)="valueChanged($event)" />
-                        </ng-container>
-                        <ng-container *ngIf="!row.editableAttr">
-                            {{ row.nonEditable}}
-                        </ng-container>
-                    </td>
-                    <td class="data-row">
-                        <input type="text" [(ngModel)]="dataRows[i].editable" (blur)="valueChanged($event)"
-                            (keyup.enter)="valueChanged($event)" />
-                    </td>
-                    <td>
-                        <button name="deleteBtn" (click)="deleteTableRow(row.nonEditable)" tabindex="-1">x</button>
-                    </td>
-                </tr>
-                <!-- Rows will be added here -->
-            </tbody>
-        </table>
-    
-        <button [disabled]="disableButton" (click)="logResult()">
-            See Results!
-        </button>
-    </ng-container>
+                        <input type="text" [(ngModel)]="dataRows[i].nonEditable" (input)="valueChanged($event)" />
+                    </ng-container>
+                    <ng-container *ngIf="!row.editableAttr">
+                        {{ row.nonEditable}}
+                    </ng-container>
+                </td>
+                <td class="data-row">
+                    <input type="text" [(ngModel)]="dataRows[i].editable" (input)="valueChanged($event)" />
+                </td>
+                <td>
+                    <button name="deleteBtn" (click)="deleteTableRow(row.nonEditable)" tabindex="-1">x</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>

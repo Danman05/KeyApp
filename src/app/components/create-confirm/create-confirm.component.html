@@ -1,0 +1,15 @@
+<ng-container *ngIf="data.length > 0">
+    <h3>Oplysningstabel</h3>
+    <table>
+        <tbody>
+            <ng-container *ngFor="let item of data">
+                <ng-container *ngFor="let key of getKeys(); let i = index">
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ getValues(item)[i] }}</td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-container>

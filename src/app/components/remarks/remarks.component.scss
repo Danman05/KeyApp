@@ -13,6 +13,7 @@ select {
 table {
     border-collapse: collapse;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 table,
@@ -23,7 +24,7 @@ td {
 
 th,
 td {
-    padding: 8px;
+    padding: 4px;
     text-align: left;
 }
 
@@ -56,4 +57,9 @@ button {
 /* Hover effect for Button */
 button:hover {
     background-color: #0056b3;
+}
+
+.errorLabel{
+    color: #ff0000;
+     font-size: 14px;
 }

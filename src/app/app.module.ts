@@ -13,6 +13,8 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { CreateConfirmComponent } from './components/create-confirm/create-confirm.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,13 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     CreateItemComponent,
     ProfileComponent,
     NavigationComponent,
+    CreateConfirmComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
