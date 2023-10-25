@@ -9,8 +9,8 @@
             <!-- Add image handeling, when user adds image
                 Create img dynamicaly for each uploaded picture -->
 
-            <select (change)="categoryChange($event)">
-                <option disabled selected>Vælg kategori</option>
+            <select (change)="categoryChange($event)" [(ngModel)]="selectedCategory.kategoriId">
+                <option value="0" disabled selected>Vælg kategori</option>
                 <option *ngFor="let item of itemCategories" value="{{item.kategoriId}}">{{item.enhedsType}}</option>
             </select>
             <textarea class="titleTxt" placeholder="titel" maxlength="200" rows="4" cols="24"
@@ -18,7 +18,7 @@
             <textarea class="descriptionTxt" placeholder="beskrivelse" maxlength="1000" rows="8" cols="36"
                 [(ngModel)]="itemDescription"></textarea>
             <div class="submitBtn">
-                <button (click)="createItem()">Gå til bekræftelse</button>
+                <button (click)="confirmCreate = true">Gå til bekræftelse</button>
             </div>
         </div>
         <div class="remark-container">
@@ -39,7 +39,7 @@
         <label class="descriptionTxt" >{{ itemDescription }}</label>
         <div class="submitBtn">
             <button (click)="createItem()">Bekræft</button>
-            <button (click)="goBack()">Gå tilbage</button>
+            <button (click)="confirmCreate = false">Gå tilbage</button>
         </div>
     </div>
     <div class="remark-container">

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Category } from 'src/app/interface/category';
 import { ImageUploadService } from 'src/app/service/image-upload.service';
 import { Item } from 'src/app/interface/item';
+import { ItemService } from 'src/app/service/item.service';
 @Component({
   selector: 'app-create-item',
   templateUrl: './create-item.component.html',
@@ -20,7 +21,7 @@ export class CreateItemComponent {
   confirmCreate: boolean = false;
   imgLink: string = null!;
 
-  constructor(private fileUploadService: ImageUploadService) {
+  constructor(private fileUploadService: ImageUploadService, private itemService: ItemService) {
   }
 
   setRemark(jsonText: string) {
@@ -47,6 +48,7 @@ export class CreateItemComponent {
       });
     }
   }
+
   createItem() {
     const item: Item = {
       enhedTitel: this.itemTitle,
@@ -54,16 +56,11 @@ export class CreateItemComponent {
       enhedBemærkning: this.remarkJson,
       enhedBillede: "",
       enhedKategoriId: this.selectedCategory?.kategoriId!,
-      enhedEjerId: 0,
-      reserveringStatusId: 0
+      enhedEjerId: 1,
+      reserveringStatusId: 1
     }
-
-    this.confirmCreate = true;
-    console.log(this.remarkJson);
-    console.log(item);
-  }
-
-  goBack() {
-    this.confirmCreate = false;
+    this.itemService.create(item).subscribe(res => {
+      console.log(res);
+    })
   }
 }
