@@ -1,8 +1,7 @@
 const con = {
     db: {
         host: "localhost",
-        user: "KeyAppAdmin",
-        password: "Kode1234!",
+        user: "root",
         database: "keyapp",
     },
     listPerPage: 50,
