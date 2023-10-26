@@ -10,18 +10,19 @@ export class ImageUploadService {
   constructor(private http: HttpClient) { }
 
     // API url 
-  baseApiUrl = "https://file.io"  
+  private endpoint: string = 'http://localhost:3000/images';
   // Returns an observable 
-  upload(file: File):Observable<any> { 
+  upload(file: File[]):Observable<any> { 
   
       // Create form data 
       const formData = new FormData();  
         
       // Store form name as "file" with file data 
-      formData.append("file", file, file.name); 
-        
+    for (let i = 0; i < file.length; i++) {
+      formData.append('file', file[i]);
+    }        
       // Make http post request over api 
       // with formData as req 
-      return this.http.post(this.baseApiUrl, formData) 
+      return this.http.post(`${this.endpoint}/upload`, formData) 
     }
 }
