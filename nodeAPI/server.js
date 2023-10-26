@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 const usersRouter = require("./routes/users");
 const itemRouter = require("./routes/items");
-
+const imageRouter = require("./routes/images");
 app.use(cors({origin: true}));
 app.use(express.json());
 app.use(
@@ -19,6 +19,8 @@ app.get("/", (req, res) => {
 app.use("/users", usersRouter);
 
 app.use("/items", itemRouter);
+
+app.use("/images", imageRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
