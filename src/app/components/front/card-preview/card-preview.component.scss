@@ -1,0 +1,34 @@
+.card-container {
+    max-width: 800px;
+    display: flex;
+    flex-direction: row;
+}
+
+.example-card {
+    color: #ffffff;
+    margin: 4px;
+    width: 200px;
+    max-width: 200px;
+    max-height: 400px;
+    min-height: 100px;
+    overflow: hidden;
+    /* Hide overflowing text */
+}
+
+.item-picture {
+    max-height: 120px;
+}
+
+
+.example-card:hover {
+
+    .example-card,
+    p {
+        border-bottom: 1px solid white;
+    }
+
+    .example-card,
+    mat-card-title {
+        border-bottom: 1px solid white;
+    }
+}

@@ -1,1 +1,9 @@
-<p>front works!</p>
+<div class="navigation">
+    <a [routerLink]="['udlån']">Opret</a>
+    <a [routerLink]="['log-ind']">Log ind</a>
+    <a [routerLink]="['profil']">Profil</a>
+</div>
+
+<ng-container *ngIf="items.length > 0">
+    <app-card-preview [items]="items"></app-card-preview>
+</ng-container>
