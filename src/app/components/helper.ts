@@ -8,4 +8,13 @@ export class Helper {
         else 
             return true; // Error - failed test
     }
+    // Simple json verification
+    static isJsonString(str: string) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
 }

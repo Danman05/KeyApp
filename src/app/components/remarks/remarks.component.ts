@@ -85,23 +85,13 @@ export class RemarksComponent implements OnInit {
     }
     json += "}"
 
-    if (this.isJsonString(json)) {
+    if (Helper.isJsonString(json)) {
       const dataRowsJSON = JSON.stringify(this.dataRows);
       localStorage.setItem("remarks", dataRowsJSON);
       return json;
     }
     else
       return ""
-  }
-
-  // Simple json verification
-  isJsonString(str: string) {
-    try {
-      JSON.parse(str);
-    } catch (e) {
-      return false;
-    }
-    return true;
   }
 
   // Emits to the parent component
