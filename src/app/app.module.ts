@@ -15,7 +15,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 
 import { HttpClientModule } from '@angular/common/http';
 import { CreateConfirmComponent } from './components/create-confirm/create-confirm.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule} from '@angular/material/button';
+import { CardPreviewComponent } from './components/front/card-preview/card-preview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,12 +31,16 @@ import { CreateConfirmComponent } from './components/create-confirm/create-confi
     ProfileComponent,
     NavigationComponent,
     CreateConfirmComponent,
+    CardPreviewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

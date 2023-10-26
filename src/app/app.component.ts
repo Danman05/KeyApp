@@ -15,9 +15,6 @@ export class AppComponent implements OnInit {
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    // this.itemService.getItems().subscribe(res => {
-    //   console.log(res);
-    //})
 
     this.itemService.getCategories().subscribe(res => {
       this.itemCategories = res.data
