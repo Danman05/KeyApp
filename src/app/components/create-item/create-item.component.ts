@@ -1,27 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/interface/category';
 import { ImageUploadService } from 'src/app/service/image-upload.service';
 import { Item } from 'src/app/interface/item';
 import { ItemService } from 'src/app/service/item.service';
+import { Router } from '@angular/router';
+import { Helper } from '../helper';
 @Component({
   selector: 'app-create-item',
   templateUrl: './create-item.component.html',
   styleUrls: ['./create-item.component.scss']
 })
-export class CreateItemComponent {
-  @Input() itemCategories: Category[] | undefined;
+export class CreateItemComponent implements OnInit {
+  itemCategories: Category[] | undefined;
   itemTitle: string = "";
   itemDescription: string = "";
-  selectedCategory: Category = { enhedsType: "", kategoriId: 0};
-  selectedCategoryTxt: Category | undefined;
-
-  remarkJson: string= ""; // Json text from remark componenet
-  file: File | undefined;
+  selectedCategory: Category = { enhedsType: "", kategoriId: 0 };
+  imageStr: string = "";
+  remarkJson: string = ""; // Json text from remark componenet
+  file: File[] = [];
 
   confirmCreate: boolean = false;
   imgLink: string = null!;
 
-  constructor(private fileUploadService: ImageUploadService, private itemService: ItemService) {
+  constructor(private fileUploadService: ImageUploadService, private itemService: ItemService, private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.itemService.getCategories().subscribe(res => {
+      this.itemCategories = res.data;
+    })
   }
 
   setRemark(jsonText: string) {
@@ -34,33 +41,44 @@ export class CreateItemComponent {
       this.selectedCategory = foundCategory;
   }
   onChange(event: any) {
-    this.file = event.target.files[0];
-    this.uploadFile();
-  }
-  uploadFile() {
-    if (this.file) {
-      
-      this.fileUploadService.upload(this.file).subscribe(res => {
-        if (typeof (res) === 'object') {          
-          // Short link via api response 
-          this.imgLink = res.link;    
-        } 
-      });
-    }
+    this.file = event.target.files;
   }
 
+  uploadFile() {
+    if (this.file)
+      this.fileUploadService.upload(this.file).subscribe();
+  }
+
+  buildImageJson(): string {
+    this.imageStr = '{"enhedBillede": [';
+
+    for (let i = 0; i < this.file.length; i++)
+      if (i + 1 == this.file.length)
+        this.imageStr += `"${this.file[i].name}"`;
+      else
+        this.imageStr += `"${this.file[i].name}",`;
+
+    this.imageStr += ']}';
+    if (Helper.isJsonString(this.imageStr))
+      return this.imageStr;
+
+    else return "";
+  }
   createItem() {
+    this.uploadFile();
+
     const item: Item = {
       enhedTitel: this.itemTitle,
       enhedBeskrivelse: this.itemDescription,
       enhedBemærkning: this.remarkJson,
-      enhedBillede: "",
+      enhedBillede: this.buildImageJson(),
       enhedKategoriId: this.selectedCategory?.kategoriId!,
       enhedEjerId: 1,
       reserveringStatusId: 1
     }
     this.itemService.create(item).subscribe(res => {
       console.log(res);
+      this.router.navigate([""]);
     })
   }
 }

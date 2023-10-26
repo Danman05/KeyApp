@@ -3,11 +3,14 @@
     <div class="front-page-container">
         <div class="middle">
 
-            <input hidden id="file-uploader" class="form-control" type="file" (change)="onChange($event)">
+            <input hidden id="file-uploader" class="form-control" type="file" multiple (change)="onChange($event)" accept="image/png, image/jpeg">
 
             <label id="file-upload-lbl" for="file-uploader">Tilføj billede</label>
-            <!-- Add image handeling, when user adds image
-                Create img dynamicaly for each uploaded picture -->
+            <ul>
+                <li *ngFor="let item of file">
+                    {{ item.name }}
+                </li>
+            </ul>
 
             <select (change)="categoryChange($event)" [(ngModel)]="selectedCategory.kategoriId">
                 <option value="0" disabled selected>Vælg kategori</option>
@@ -18,6 +21,7 @@
             <textarea class="descriptionTxt" placeholder="beskrivelse" maxlength="1000" rows="8" cols="36"
                 [(ngModel)]="itemDescription"></textarea>
             <div class="submitBtn">
+                <button routerLink="">Tilbage til forsiden</button>
                 <button (click)="confirmCreate = true">Gå til bekræftelse</button>
             </div>
         </div>
