@@ -5,7 +5,20 @@ const port = 3000;
 const usersRouter = require("./routes/users");
 const itemRouter = require("./routes/items");
 const imageRouter = require("./routes/images");
-app.use(cors({origin: true}));
+
+/* Defaut cors configuration
+{
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+*/
+app.use(cors(
+    {
+        origin: "http://localhost:4200",
+        methods: ['GET', 'POST', 'PUT', 'DELETE']
+    }));
 app.use(express.json());
 app.use(
     express.urlencoded({
@@ -30,5 +43,5 @@ app.use((err, req, res, next) => {
     return;
 });
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`App listening at http://localhost:${port}`);
 });
