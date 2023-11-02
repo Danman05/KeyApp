@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from 'src/app/interface/item';
+import { ItemPreview } from 'src/app/interface/item-preview';
 import { ItemService } from 'src/app/service/item.service';
 
 @Component({
@@ -9,12 +9,15 @@ import { ItemService } from 'src/app/service/item.service';
 })
 export class FrontComponent implements OnInit {
 
-  items: Item[] = []; 
+  items: ItemPreview[] = []; 
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
     this.itemService.getItems().subscribe(res => {
       this.items = res.data;
+      console.log(this.items);
+      for (let i = 0; i < this.items.length; i++) {    
+      }
     });
   }
 }

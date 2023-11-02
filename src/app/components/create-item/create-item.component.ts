@@ -42,28 +42,38 @@ export class CreateItemComponent implements OnInit {
   }
   onChange(event: any) {
     this.file = event.target.files;
+    this.uploadFile();
+
   }
 
   uploadFile() {
     if (this.file)
-      this.fileUploadService.upload(this.file).subscribe();
+      this.fileUploadService.upload(this.file).subscribe(res => {
+    console.log(res);
+    this.buildImageJson(res);
+  });
   }
 
-  buildImageJson(): string {
-    this.imageStr = '{"enhedBillede": [';
+  buildImageJson(filepaths: string[])  {
+    let tmpImgStr = '{"enhedBillede": [';
 
-    for (let i = 0; i < this.file.length; i++)
-      if (i + 1 == this.file.length)
-        this.imageStr += `"${this.file[i].name}"`;
-      else
-        this.imageStr += `"${this.file[i].name}",`;
+    for (let i = 0; i < filepaths.length; i++) {
+      if (i + 1 == filepaths.length) {
+        tmpImgStr += `"${filepaths[i]}"`;
+        console.log("end of files");
+      }
+      else {
+        console.log("added new file");
 
-    this.imageStr += ']}';
-    if (Helper.isJsonString(this.imageStr))
-      return this.imageStr;
-
-    else return "";
+        tmpImgStr += `"${filepaths[i]}",`;
+      }
+    }
+    tmpImgStr += ']}';
+    if (Helper.isJsonString(tmpImgStr)) {
+      this.imageStr = tmpImgStr;
+    }
   }
+
   createItem() {
     this.uploadFile();
 
@@ -71,7 +81,7 @@ export class CreateItemComponent implements OnInit {
       enhedTitel: this.itemTitle,
       enhedBeskrivelse: this.itemDescription,
       enhedBemærkning: this.remarkJson,
-      enhedBillede: this.buildImageJson(),
+      enhedBillede: this.imageStr,
       enhedKategoriId: this.selectedCategory?.kategoriId!,
       enhedEjerId: 1,
       reserveringStatusId: 1
