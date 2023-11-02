@@ -5,5 +5,5 @@
 </div>
 
 <ng-container *ngIf="items.length > 0">
-    <app-card-preview [items]="items"></app-card-preview>
+    <app-card-preview (clickedOnCard)="itemInfoPage($event)" [items]="items"></app-card-preview>
 </ng-container>

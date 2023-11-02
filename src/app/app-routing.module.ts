@@ -10,7 +10,7 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
 const routes: Routes = [
   { path: '', component: FrontComponent},
   { path: 'udlån', component: CreateItemComponent},
-  { path: 'enhed', component: ItemComponent},
+  { path: 'enhed/:id', component: ItemComponent},
   { path: 'log-ind', component: LoginComponent},
   { path: 'profil', component: ProfileComponent}
 ];

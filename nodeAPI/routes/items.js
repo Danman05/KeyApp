@@ -12,21 +12,22 @@ router.get('/', async function (req, res, next) {
     }
 });
 
-/* GET one item. */
-router.get('/item', async function (req, res, next) {
-    try {
-        res.json(await items.getOneItem(req.query.page));
-    } catch (err) {
-        console.error(`Error while getting users `, err.message);
-        next(err);
-    }
-});
 /* GET categories. */
 router.get('/categories', async function (req, res, next) {
     try {
         res.json(await items.getCategories(req.query.page));
     } catch (err) {
         console.error(`Error while getting categories `, err.message);
+        next(err);
+    }
+});
+/* GET one item. */
+router.get('/:itemId', async function (req, res, next) {
+    try {
+        const itemId = req.params.itemId;
+        res.json(await items.getOneItem(req.query.page, itemId));
+    } catch (err) {
+        console.error(`Error while getting users `, err.message);
         next(err);
     }
 });
