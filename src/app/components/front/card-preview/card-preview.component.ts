@@ -8,8 +8,8 @@ import { ItemPreview } from 'src/app/interface/item-preview';
 })
 export class CardPreviewComponent {
 
-  gallaryIndex = 0;
-  gallaryMaxItems = 4;
+  gallaryIndex: number = 0;
+  @Input() gallaryMaxItems: number = 4;
 
   @Input() items: ItemPreview[] = [];
   @Output() clickedOnCard = new EventEmitter<number>();

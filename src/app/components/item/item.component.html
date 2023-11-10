@@ -1,47 +1,37 @@
 <!-- item-detail.component.html -->
 
 <div class="item-detail" *ngIf="item">
-    <h2>{{ item.enhedTitel }}</h2>
+  <h2>{{ item.enhedTitel }}</h2>
 
-    <div class="item-images">
-      <img class="main-image" [src]="getFirstImage(item.enhedBillede)" alt="Main Image">
-      <div class="thumbnail-images">
-        <img *ngFor="let image of images.slice(1)" [src]="image" alt="Thumbnail Image">
-      </div>
+  <div class="item-images">
+    <img class="main-image" [src]="firstImage" alt="Main Image">
+    <div class="thumbnail-images">
+      <img *ngFor="let image of restImages" [src]="image" alt="Thumbnail Image">
     </div>
-  
-    <!-- <table class="item-info">
-      <tr>
-        <th>Description</th>
-        <td>{{ item.description }}</td>
-      </tr>
-      <tr>
-        <th>Remarks</th>
-        <td>
-          <table class="remarks-table">
-            <tr>
-              <th>Weight</th>
-              <td>{{ item.remarks.weight }}</td>
-            </tr>
-            <tr>
-              <th>Height</th>
-              <td>{{ item.remarks.height }}</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <th>Category</th>
-        <td>{{ item.category }}</td>
-      </tr>
-      <tr>
-        <th>Owner ID</th>
-        <td>{{ item.ownerId }}</td>
-      </tr>
-      <tr>
-        <th>Reservation Status</th>
-        <td>{{ item.reservationStatus }}</td>
-      </tr>
-    </table> -->
+
+    <div class="user-box">
+      <h2>Ejer oplysninger</h2>
+      <p>{{ item.enhedEjer.fornavn}} {{ item.enhedEjer.efternavn}}</p>
+      <p class="user-box-info">{{ item.enhedEjer.mail}}</p>
+      <p class="user-box-info">{{ item.enhedEjer.telefonnummer}}</p>
+    </div>
+
   </div>
+  <table class="item-info">
+    <tr>
+      <th>Beskrivelse</th>
+      <td>{{ item.enhedBeskrivelse }}</td>
+    </tr>
+    <tr>
+      <th>Kategori</th>
+      <td>{{ item.enhedsType }}</td>
+    </tr>
+    <tr>
+      <th>Reservering tatus</th>
+      <td>{{ item.statusBesked }}</td>
+    </tr>
+  </table>
+
+  <app-remark-table [remarkString]="remarkString"></app-remark-table>
   
+</div>

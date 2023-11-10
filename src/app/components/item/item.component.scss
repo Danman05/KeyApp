@@ -1,56 +1,72 @@
 /* item-detail.component.css */
 .item-detail {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.item-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.item-images {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main-image {
+  max-width: 400px;
+  max-height: 400px;
+  margin-right: 20px;
+}
+
+.thumbnail-images img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-right: 10px;
+}
+
+.item-info th {
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.item-description {
+  font-style: italic;
+  line-height: 1.4;
+  padding-bottom: 10px;
+}
+
+.user-box {
+  border-radius: 25px;
+  overflow: hidden;
+  position: absolute;
+  left: 77%;
+  padding: 20px;
+  background: #dedede;
+  text-align: left;
+  
+  h2 {
+    text-decoration: underline;
   }
   
-  .item-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .item-images {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .main-image {
-    max-width: 400px;
-    max-height: 400px;
-    margin-right: 20px;
-  }
-  
-  .thumbnail-images img {
-    max-width: 100px;
-    max-height: 100px;
-    margin-right: 10px;
-  }
-  
-  .item-info th {
-    font-weight: bold;
-    padding-right: 10px;
-  }
-  
-  .item-description {
-    font-style: italic;
-    line-height: 1.4;
-    padding-bottom: 10px;
-  }
-  
-  .remarks-table th, .remarks-table td {
-    padding: 5px 0;
-  }
-  
-  .item-category {
-    color: #007BFF;
-  }
-  
-  .item-owner-id {
-    color: #28A745;
-  }
-  
-  .item-reservation-status {
-    color: #DC3545;
-  }
+}
+
+.remarks-table th,
+.remarks-table td {
+  padding: 5px 0;
+}
+
+.item-category {
+  color: #007BFF;
+}
+
+.item-owner-id {
+  color: #28A745;
+}
+
+.item-reservation-status {
+  color: #DC3545;
+}

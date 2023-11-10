@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Item } from '../interface/item';
-import { ItemPreview } from '../interface/item-preview';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,5 +24,11 @@ export class ItemService {
   }
   create(item: Item): Observable<any> {
     return this.http.post<any>(`${this.endpoint}/create`, item);
+  }
+  getUsersItem(userId: number) : Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/userItem`, { params: {userId}});
+  }
+  getUserKeys(userId: number) : Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/userKey`, { params: {userId}})
   }
 }

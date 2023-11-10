@@ -17,17 +17,10 @@ export class FrontComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.getItems().subscribe(res => {
       this.items = res.data;
-      console.log(this.items); 
-
     });
-
-    this.itemService.getFullItem(2).subscribe(res => {
-      console.log(res.data);
-    })
   }
 
   itemInfoPage(number: number) {
-    console.log(number);
       this.router.navigate(['enhed', number]);
   }
 }

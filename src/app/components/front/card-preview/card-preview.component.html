@@ -3,11 +3,13 @@
 
 <div class="card-container">
     <ng-container *ngFor="let item of items.slice(gallaryIndex, gallaryIndex + gallaryMaxItems)">
-        <mat-card (click)="itemClick(item)" class="example-card">
-            <img *ngIf="item.enhedBillede" class="item-picture" mat-card-image [src]="getFirstImage(item.enhedBillede)"
+        <mat-card (click)="itemClick(item)" class="card">
+            <div class="image-container">
+                <img *ngIf="item.enhedBillede" class="item-picture"  [src]="getFirstImage(item.enhedBillede)"
                 (error)="onImageError($event)">
-            <img *ngIf="!item.enhedBillede" class="item-picture" mat-card-image
+                <img *ngIf="!item.enhedBillede" class="item-picture" 
                 src={{noImageUrl}}>
+            </div>
             <mat-card-header>
                 <mat-card-title>{{ item.enhedTitel }}</mat-card-title>
             </mat-card-header>

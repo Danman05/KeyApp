@@ -1,15 +1,9 @@
 <div class="container">
     <div class="input-form">
-            <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate [ngFormOptions]="{updateOn: 'change'}"> 
-                <input type="text" name="first" ngModel required #first="ngModel">
-                <input  type="password" name="last" ngModel>
-                <button>Submit</button>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" [ngFormOptions]="{updateOn: 'change'}"> 
+                <input type="text" name="credUser" ngModel required placeholder="mail">
+                <input  type="password" name="credPass" ngModel required placeholder="password">
+                <button>Log ind</button>
             </form>
-            
-            <p>First name value: {{ first.value }}</p>
-            <p>First name valid: {{ first.valid }}</p>
-            <p>Form value: {{ f.value | json }}</p>
-            <p>Form valid: {{ f.valid }}</p>
-
     </div>
 </div>

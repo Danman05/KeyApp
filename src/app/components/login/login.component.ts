@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserLoginService } from 'src/app/service/user-login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,19 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent {
 
+  constructor (private authService: UserLoginService) {}
   onSubmit(f: NgForm) {
-    console.log(f.value);  // { first: '', last: '' }
-    console.log(f.valid);  // false
+    if (f.valid) {
+      this.authService.logIn(f.value.credUser, f.value.credPass).subscribe(res => {
+        this.authService.loggedInUser = res
+        console.log(this.authService.loggedInUser);
+        if (this.authService.loggedInUser) {
+          console.log("valid login");
+        }
+        else {
+          console.log("login failed");
+        }
+      });
+    }
   }
 }

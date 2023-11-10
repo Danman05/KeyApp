@@ -1,10 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ItemPreview } from 'src/app/interface/item-preview';
+import { ItemService } from 'src/app/service/item.service';
+import { UserLoginService } from 'src/app/service/user-login.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+
+  ownedItems: ItemPreview[];
+  reservedItems: ItemPreview[];
+
+  constructor(private itemService: ItemService, private authService: UserLoginService) { }
+
+  ngOnInit(): void {
+
+    if (!this.authService.loggedInUser) {
+      // TESTING LOGIN
+      console.log("not logged in - using test login");
+      const loginAsUser = 0;
+
+      const testLogins = {
+        user: [
+          { mail: "Daniel@mail.com", password: "Kode1234!" },
+          { mail: "IkkeDaniel@mail.com", password: "Kode1234!" }
+        ]
+      };
+
+      this.authService.logIn(testLogins.user[loginAsUser].mail, testLogins.user[loginAsUser].password).subscribe(res => {
+        console.log(res);
+        this.authService.loggedInUser = res;
+        this.getItem(this.authService.loggedInUser.brugerId);
+      });
+    }
+    else {
+        console.log("is logged in");
+
+        this.getItem(this.authService.loggedInUser.brugerId)
+    }
+  }
+  getItem(userId: number) {
+    this.itemService.getUsersItem(userId).subscribe(res => {
+      this.ownedItems = res;
+    });
+    this.itemService.getUserKeys(userId).subscribe(res => {
+      this.reservedItems = res;
+    });
+  }
 
 }

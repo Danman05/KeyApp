@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/interface/item';
+import { ItemFull } from 'src/app/interface/item-full';
 import { ItemService } from 'src/app/service/item.service';
 
 @Component({
@@ -8,38 +9,32 @@ import { ItemService } from 'src/app/service/item.service';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
-export class ItemComponent {
-  itemId: number = 0;
-  item!: Item;
-  itemImages: any;
-  images: string[] = [];
+export class ItemComponent implements OnInit {
+
+  itemId: number;
+  item: ItemFull;
+  firstImage: string = "";
+  restImages: string[] = [];
+  remarkString: string;
   imageEndpoint: string = "http://localhost/key-app/uploads/";
   constructor(private route: ActivatedRoute, private itemService: ItemService) {
 
+  }
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.itemId = params["id"]; // Access the route parameter
 
-      itemService.getFullItem(this.itemId).subscribe(res => { 
-        this.item = res.data[0];
-        this.itemImages = JSON.parse(this.item.enhedBillede);
+      this.itemService.getFullItem(this.itemId).subscribe(res => {
+        this.remarkString = res.item.enhedBemærkning;
+        this.item = res.item;
+        this.item.enhedEjer = res.user
+
+        const itemImages = JSON.parse(res.item.enhedBillede);
+        this.firstImage = this.imageEndpoint + itemImages.enhedBillede[0];
+
+        for (let i = 1; i < itemImages.enhedBillede.length; i++)
+          this.restImages[i - 1] = this.imageEndpoint + itemImages.enhedBillede[i]; 
       });
-    });
-  }
-
-  getFirstImage(enhedBillede: string): string {
-    try {
-      const images = JSON.parse(enhedBillede);
-      if (enhedBillede.length > 0)
-
-      this.images = images.enhedBillede
-    console.log(images)
-      return this.imageEndpoint + images.enhedBillede[0];
-    } catch (error) {
-      console.error(`Error getting image path for item`);
-    }
-    return "";
-  }
-
-
-
+    }) 
+   }
 }

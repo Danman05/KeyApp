@@ -21,11 +21,33 @@ router.get('/categories', async function (req, res, next) {
         next(err);
     }
 });
+/* GET owned items */
+router.get('/userItem', async function(req, res, next) {
+    try {
+        res.json(await items.getUserItems(req.query.userId));
+    } catch (err) {
+        console.error(`Error while getting categories `, err.message);
+        next(err); 
+    }
+});
+
+/* GET owner keys */
+router.get('/userKey', async function (req, res, next) {
+    try {
+        res.json(await items.getUserKeys(req.query.userId));
+    } catch (err) {
+        console.error(`Error while getting categories `, err.message);
+        next(err);
+    }
+});
+
 /* GET one item. */
 router.get('/:itemId', async function (req, res, next) {
     try {
         const itemId = req.params.itemId;
-        res.json(await items.getOneItem(req.query.page, itemId));
+        const data = await items.getOneItemFull(itemId)
+        console.log(data);
+        res.json(await items.getOneItemFull(itemId));
     } catch (err) {
         console.error(`Error while getting users `, err.message);
         next(err);

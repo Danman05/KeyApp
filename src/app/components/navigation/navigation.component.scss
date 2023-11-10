@@ -1,0 +1,28 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(to right,#FFFFFF, #000000);
+}
+
+.button-link {
+    text-decoration: none;
+    background-color: rgba($color: #0074d9, $alpha: 0.5);
+    /* Button background color */
+    color: #fff;
+    /* Button text color */
+    padding: 10px 20px;
+    /* Button padding */
+    border: 1px solid #0074d9;
+    /* Button border (optional) */
+    border-radius: 5px;
+    /* Button border radius (optional) */
+}
+
+.button-link:hover {
+    text-decoration: underline;
+    /* Add underline when hovering */
+}
+
+.button-text {
+    display: block;
+}

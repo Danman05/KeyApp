@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-create-confirm',
-  templateUrl: './create-confirm.component.html',
-  styleUrls: ['./create-confirm.component.scss']
+  selector: 'app-remark-table',
+  templateUrl: './remark-table.component.html',
+  styleUrls: ['./remark-table.component.scss']
 })
-export class CreateConfirmComponent implements OnInit {
-  @Input() remarkString: string = "";
+export class RemarkTableComponent implements OnInit {
+  @Input() remarkString: string;
   data: any[] = [];
   ngOnInit(): void {
-    if (this.data) {     
+    if (this.remarkString) {     
       try {
         this.data = JSON.parse(this.remarkString);
         if (!Array.isArray(this.data)) {

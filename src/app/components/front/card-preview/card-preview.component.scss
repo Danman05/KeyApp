@@ -4,19 +4,25 @@
     flex-direction: row;
 }
 
-.example-card {
+.card {
     color: #ffffff;
     margin: 4px;
     width: 200px;
     max-width: 200px;
-    max-height: 400px;
+    max-height: 300px;
     min-height: 100px;
-    overflow: hidden;
+    // overflow: hidden;
     /* Hide overflowing text */
 }
 
-.item-picture {
-    max-height: 120px;
+.item-picture{
+    height: 100%;
+    width: 100%;
+    object-fit: cover
+}
+
+.image-container {
+    height: 120px;
 }
 
 

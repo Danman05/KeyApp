@@ -14,11 +14,12 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { CreateConfirmComponent } from './components/create-confirm/create-confirm.component';
+import { RemarkTableComponent } from './components/remark-table/remark-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { CardPreviewComponent } from './components/front/card-preview/card-preview.component';
+import { UserItemsComponent } from './components/profile/user-items/user-items.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +31,9 @@ import { CardPreviewComponent } from './components/front/card-preview/card-previ
     CreateItemComponent,
     ProfileComponent,
     NavigationComponent,
-    CreateConfirmComponent,
+    RemarkTableComponent,
     CardPreviewComponent,
+    UserItemsComponent,
   ],
   imports: [
     BrowserModule,

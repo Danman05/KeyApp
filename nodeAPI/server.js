@@ -2,9 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 3000;
-const usersRouter = require("./routes/users");
 const itemRouter = require("./routes/items");
 const imageRouter = require("./routes/images");
+const userRouter = require("./routes/user");
 
 /* Defaut cors configuration
 {
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
     res.json({ message: "ok" });
 });
 
-app.use("/users", usersRouter);
+app.use('/user', userRouter);
 
 app.use("/items", itemRouter);
 
