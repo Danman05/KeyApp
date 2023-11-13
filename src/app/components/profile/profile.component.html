@@ -1,12 +1,17 @@
 <p>Profil</p>
 
-
 <ng-container *ngIf="ownedItems">
     <h1>Mine Enheder</h1>
-    <app-card-preview [items]="ownedItems"></app-card-preview>
+    <app-card-preview (clickedOnCard)="itemInfoPage($event)" [items]="ownedItems"></app-card-preview>
 </ng-container> 
 
 <ng-container *ngIf="reservedItems">
     <h1>Mine reservationer</h1>
-    <app-card-preview [items]="reservedItems"></app-card-preview>
+    <app-card-preview (clickedOnCard)="itemInfoPage($event)" [items]="reservedItems"></app-card-preview>
 </ng-container>
+
+
+
+
+
+

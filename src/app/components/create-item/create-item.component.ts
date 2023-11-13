@@ -5,24 +5,27 @@ import { Item } from 'src/app/interface/item';
 import { ItemService } from 'src/app/service/item.service';
 import { Router } from '@angular/router';
 import { Helper } from '../helper';
+import { UserLoginService } from 'src/app/service/user-login.service';
 @Component({
   selector: 'app-create-item',
   templateUrl: './create-item.component.html',
   styleUrls: ['./create-item.component.scss']
 })
 export class CreateItemComponent implements OnInit {
+
   itemCategories: Category[] | undefined;
   itemTitle: string = "";
   itemDescription: string = "";
   selectedCategory: Category = { enhedsType: "", kategoriId: 0 };
   imageStr: string = "";
-  remarkJson: string = ""; // Json text from remark componenet
+  remarkJson: string = ""; // Input string for remark-table
   file: File[] = [];
 
   confirmCreate: boolean = false;
   imgLink: string = null!;
 
-  constructor(private fileUploadService: ImageUploadService, private itemService: ItemService, private router: Router) {
+  constructor(private fileUploadService: ImageUploadService, private itemService: ItemService,
+    private loginService: UserLoginService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -40,6 +43,7 @@ export class CreateItemComponent implements OnInit {
     if (foundCategory)
       this.selectedCategory = foundCategory;
   }
+
   onChange(event: any) {
     this.file = event.target.files;
     this.uploadFile();
@@ -49,33 +53,30 @@ export class CreateItemComponent implements OnInit {
   uploadFile() {
     if (this.file)
       this.fileUploadService.upload(this.file).subscribe(res => {
-    console.log(res);
-    this.buildImageJson(res);
-  });
+        console.log(res);
+        this.buildImageJson(res);
+      });
   }
 
-  buildImageJson(filepaths: string[])  {
+  buildImageJson(filepaths: string[]) {
     let tmpImgStr = '{"enhedBillede": [';
 
     for (let i = 0; i < filepaths.length; i++) {
-      if (i + 1 == filepaths.length) {
-        tmpImgStr += `"${filepaths[i]}"`;
-        console.log("end of files");
-      }
-      else {
-        console.log("added new file");
 
+      if (i + 1 == filepaths.length)
+        tmpImgStr += `"${filepaths[i]}"`;
+      else
         tmpImgStr += `"${filepaths[i]}",`;
-      }
     }
+
     tmpImgStr += ']}';
+
     if (Helper.isJsonString(tmpImgStr)) {
       this.imageStr = tmpImgStr;
     }
   }
 
   createItem() {
-    this.uploadFile();
 
     const item: Item = {
       enhedTitel: this.itemTitle,
@@ -83,7 +84,7 @@ export class CreateItemComponent implements OnInit {
       enhedBemærkning: this.remarkJson,
       enhedBillede: this.imageStr,
       enhedKategoriId: this.selectedCategory?.kategoriId!,
-      enhedEjerId: 1,
+      enhedEjerId: this.loginService.loggedInUser.brugerId,
       reserveringStatusId: 1
     }
     this.itemService.create(item).subscribe(res => {

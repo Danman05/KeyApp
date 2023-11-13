@@ -1,12 +1,13 @@
 .navigation {
     display: flex;
     flex-direction: row;
-    background: linear-gradient(to right,#FFFFFF, #000000);
+    background: linear-gradient(to left,#FFFFFF, #000000 60%);
 }
 
 .button-link {
     text-decoration: none;
-    background-color: rgba($color: #0074d9, $alpha: 0.5);
+    background:linear-gradient(135deg, purple 30%, blue);
+    margin-right: 10px;
     /* Button background color */
     color: #fff;
     /* Button text color */

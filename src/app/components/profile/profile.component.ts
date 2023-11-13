@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ItemPreview } from 'src/app/interface/item-preview';
 import { ItemService } from 'src/app/service/item.service';
 import { UserLoginService } from 'src/app/service/user-login.service';
@@ -13,7 +14,7 @@ export class ProfileComponent implements OnInit {
   ownedItems: ItemPreview[];
   reservedItems: ItemPreview[];
 
-  constructor(private itemService: ItemService, private authService: UserLoginService) { }
+  constructor(private itemService: ItemService, private authService: UserLoginService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -50,4 +51,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  itemInfoPage(number: number) {
+  this.router.navigate(['enhed', number]);
+}
 }

@@ -27,11 +27,16 @@
       <td>{{ item.enhedsType }}</td>
     </tr>
     <tr>
-      <th>Reservering tatus</th>
+      <th>Reservering status</th>
       <td>{{ item.statusBesked }}</td>
     </tr>
   </table>
 
   <app-remark-table [remarkString]="remarkString"></app-remark-table>
-  
+
+  <ng-container *ngIf="loggedUser">
+    <div *ngIf="item.enhedEjer.mail !=loggedUser.mail" class="reserve-btn-container">
+      <button class="defaultBtn">Reserver</button>
+    </div>
+    </ng-container>
 </div>
