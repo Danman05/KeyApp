@@ -9,20 +9,6 @@ async function getItems(page = 1) {
     CALL getItemPreview(${offset}, ${config.listPerPage})
     `);
     const data = helper.emptyOrRows(rows[0]);
-    console.log(data);
-    const meta = { page };
-
-    return {
-        data,
-        meta
-    }
-}
-async function getOneItem(page = 1, itemId) {
-    const offset = helper.getOffset(page, config.listPerPage);
-    const rows = await db.query(`
-    CALL getOne(${offset}, ${config.listPerPage}, ${itemId})
-    `);
-    const data = helper.emptyOrRows(rows[0]);
     const meta = { page };
 
     return {
@@ -102,19 +88,25 @@ async function createItem(item) {
         return 'No user found';
 
     await db.query(`
-    INSERT INTO enhed(enhedTitel, enhedBeskrivelse, enhedBemærkning, enhedBillede, enhedKategoriId, enhedEjerId, reserveringStatusId)
-    VALUES('${item.enhedTitel}', '${item.enhedBeskrivelse}', '${item.enhedBemærkning}', '${item.enhedBillede}', 
-    ${item.enhedKategoriId}, ${item.enhedEjerId}, ${item.reserveringStatusId})
+    CALL createItem('${item.enhedTitel}', '${item.enhedBeskrivelse}', '${item.enhedBemærkning}', '${item.enhedBillede}', 
+    ${item.enhedKategoriId}, ${item.enhedEjerId}, ${item.reserveringStatusId});
     `);
-    return `User added succesfully`
+    return `Item added succesfully`
+}
+
+async function createReservation(data) {
+    await db.query(`
+        CALL createReservation('${data.startDate}', '${data.expirationDate}', ${data.itemId}, ${data.userId});
+    `);
+    return `Reserveration added succesfully`
 }
 
 module.exports = {
     getItems,
-    getOneItem,
     getUserItems,
     getUserKeys,
     getOneItemFull,
     getCategories,
-    createItem
+    createItem,
+    createReservation
 }

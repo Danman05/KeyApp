@@ -10,8 +10,8 @@ async function createUser(queryData) {
     `);
     const mailData = helper.emptyOrRows(userMail[0]);
 
-    if (mailData[0]) 
-        return [{message: "mail is already is use"}];
+    if (mailData[0])
+        return [{ message: "mail is already is use" }];
 
     // create user, hash password & store in DB
     else {
@@ -19,7 +19,7 @@ async function createUser(queryData) {
         await db.query(`
         CALL createUser('${queryData.firstName}', '${queryData.lastName}', '${queryData.mail}', '${queryData.phone}', '${hashedPassword}')
         `);
-        return [{ message: "user registered succesfully"}];
+        return [{ message: "user registered succesfully" }];
     }
 }
 async function authUser(userMail, plainTextPassword) {

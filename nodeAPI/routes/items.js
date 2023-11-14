@@ -7,7 +7,7 @@ router.get('/', async function (req, res, next) {
     try {
         res.json(await items.getItems(req.query.page));
     } catch (err) {
-        console.error(`Error while getting users `, err.message);
+        console.error(`Error while getting items `, err.message);
         next(err);
     }
 });
@@ -22,12 +22,12 @@ router.get('/categories', async function (req, res, next) {
     }
 });
 /* GET owned items */
-router.get('/userItem', async function(req, res, next) {
+router.get('/userItem', async function (req, res, next) {
     try {
         res.json(await items.getUserItems(req.query.userId));
     } catch (err) {
-        console.error(`Error while getting categories `, err.message);
-        next(err); 
+        console.error(`Error while getting user items `, err.message);
+        next(err);
     }
 });
 
@@ -36,30 +36,39 @@ router.get('/userKey', async function (req, res, next) {
     try {
         res.json(await items.getUserKeys(req.query.userId));
     } catch (err) {
-        console.error(`Error while getting categories `, err.message);
+        console.error(`Error while getting user keys `, err.message);
         next(err);
     }
 });
+
 
 /* GET one item. */
 router.get('/:itemId', async function (req, res, next) {
     try {
         const itemId = req.params.itemId;
-        const data = await items.getOneItemFull(itemId)
-        console.log(data);
         res.json(await items.getOneItemFull(itemId));
     } catch (err) {
-        console.error(`Error while getting users `, err.message);
+        console.error(`Error while getting item from ID `, err.message);
         next(err);
     }
 });
+
+/* POST item reservation */
+router.post('/reservation', async function (req, res, next) {
+    try {
+        res.json(await items.createReservation(req.body));
+    } catch (err) {
+        console.log(`Error while getting item reservations`, err.message);
+        next(err);
+    }
+})
 
 /* POST item. */
 router.post('/create', async function (req, res, next) {
     try {
         res.json(await items.createItem(req.body));
     } catch (err) {
-        console.error(`Error while getting users `, err.message);
+        console.error(`Error while creating item `, err.message);
         next(err);
     }
 });

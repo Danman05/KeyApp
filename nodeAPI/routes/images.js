@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const image = require('../images');
 const path = require('path');
-
 const multer = require('multer');
 
 // Set up storage options for multer
@@ -15,16 +13,15 @@ const storage = multer.diskStorage({
         const ext = path.extname(file.originalname);
 
         cb(null, uniqueSuffix + ext);
-        
     }
 });
 const upload = multer({ storage: storage });
 
-router.post('/upload', upload.array('file', 10), (req, res) => {
 
+/* POST upload - uploads one or more images */
+router.post('/upload', upload.array('file', 10), (req, res) => {
     try {
         const filePaths = req.files.map(file => file.filename);
-
         res.json(filePaths);
     } catch (err) {
         console.error(`Error while getting users `, err.message);
