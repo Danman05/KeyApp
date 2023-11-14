@@ -14,6 +14,9 @@ import { UserLoginService } from 'src/app/service/user-login.service';
 export class ItemComponent implements OnInit {
 
 
+  startDate: Date;
+  endDate: Date;
+
   itemId: number;
   item: ItemFull;
   firstImage: string = "";
@@ -42,4 +45,22 @@ export class ItemComponent implements OnInit {
       });
     }) 
    }
+  reserveItem() {
+    // Convert the string dates to Date objects
+    const startDateObj = new Date(this.startDate);
+    const endDateObj = new Date(this.endDate);
+    
+    // Check if the end date is greater than the start date
+
+    if (endDateObj > startDateObj) 
+      // Reservation logic when the dates are valid
+      this.itemService.reservation(startDateObj, endDateObj , this.itemId, this.loggedUser.brugerId).subscribe(res => {
+        console.log(res);
+      });
+      
+    else 
+    // Display an error message or handle the invalid date range
+      console.error('Invalid date range. End date must be greater than start date.');
+  
+  }
 }

@@ -31,4 +31,8 @@ export class ItemService {
   getUserKeys(userId: number) : Observable<any> {
     return this.http.get<any>(`${this.endpoint}/userKey`, { params: {userId}})
   }
+  reservation(startDate: Date, expirationDate:Date, itemId: number, userId: number) : Observable<any> {
+    console.log("making res");
+    return this.http.post<any>(`${this.endpoint}/reservation`, {startDate, expirationDate, itemId, userId});
+  }
 }
