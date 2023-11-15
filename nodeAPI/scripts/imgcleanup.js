@@ -6,7 +6,7 @@
     MyImage.Png will be deleted PERMANENTLY    
 */
 
-const db = require('../db');
+const db = require('..\\db');
 const fs = require('fs');
 
 try {
@@ -32,7 +32,7 @@ try {
             }); 
 
             // Specify the directory where your images are stored
-            const imageDirectory = '../uploads';
+            const imageDirectory = 'C:\\xampp\\htdocs\\key-app\\uploads';
 
             // Read the files in the directory
             fs.readdir(imageDirectory, (err, files) => {
@@ -59,7 +59,7 @@ try {
 
     fetchData();
 } catch (err) {
-    console.log("err");
+    console.log("Error:", err);
 }
 
 
