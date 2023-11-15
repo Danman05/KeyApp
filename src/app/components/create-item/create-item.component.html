@@ -6,7 +6,8 @@
             <input hidden id="file-uploader" class="form-control" type="file" multiple (change)="onChange($event)" accept="image/png, image/jpeg">
 
             <label id="file-upload-lbl" for="file-uploader">Tilføj billede</label>
-            <ul>
+            <ul *ngIf="file.length > 0">
+                <p> Antal filer: {{file.length}}</p>
                 <li *ngFor="let item of file">
                     {{ item.name }}
                 </li>

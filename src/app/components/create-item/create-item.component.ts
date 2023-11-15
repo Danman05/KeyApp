@@ -29,9 +29,14 @@ export class CreateItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemService.getCategories().subscribe(res => {
-      this.itemCategories = res.data;
-    })
+    if (this.loginService.loggedInUser) {
+      this.itemService.getCategories().subscribe(res => {
+        this.itemCategories = res.data;
+      });
+    }
+    else {
+      this.router.navigate(["log-ind"]);
+    }
   }
 
   setRemark(jsonText: string) {
@@ -87,6 +92,7 @@ export class CreateItemComponent implements OnInit {
       enhedEjerId: this.loginService.loggedInUser.brugerId,
       reserveringStatusId: 1
     }
+    localStorage.removeItem('remarks');
     this.itemService.create(item).subscribe(res => {
       console.log(res);
       this.router.navigate([""]);
