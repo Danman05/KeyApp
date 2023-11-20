@@ -24,7 +24,7 @@ router.post('/upload', upload.array('file', 10), (req, res) => {
         const filePaths = req.files.map(file => file.filename);
         res.json(filePaths);
     } catch (err) {
-        console.error(`Error while getting users `, err.message);
+        console.error(`Error uploading images `, err);
         next(err);
     }
 });
