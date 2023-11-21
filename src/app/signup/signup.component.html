@@ -1,0 +1,31 @@
+<div class="form-container">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" [ngFormOptions]="{updateOn: 'change'}">
+        <div class="user-info-container">
+            <div class="form-group">
+                <label for="first">Fornavn</label>
+                <input class="half" type="text" id="first" name="firstName" ngModel placeholder="John">
+                <label for="last">Efternavn</label>
+                <input class="half" type="text" id="last" name="lastName"ngModel placeholder="Doe">
+            </div>
+            <div class="form-group">
+                <label for="mail">Email adresse</label>
+                <input type="text" id="mail" name="mailaddress" ngModel placeholder="johndoe@mail.com">
+                <label for="phone">Telefonnummer</label>
+                <input type="text" id="phone" name="phonenumber" ngModel placeholder="00 00 00 00">
+            </div>
+        </div>
+        <div class="user-auth-container">
+            <div class="form-group">
+                <label for="pass">Adgangskode</label>
+                <input type="password" id="pass" name="password" ngModel placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="passVerify">Gentag adgangskode</label>
+                <input type="password" id="passVerify" name="passwordVerify" ngModel placeholder="">
+            </div>
+        </div>
+        <div class="btn-container">
+            <button class="defaultBtn" type="submit">Register</button>
+        </div>
+    </form>
+</div>

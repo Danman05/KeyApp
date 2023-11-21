@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { CardPreviewComponent } from './components/front/card-preview/card-preview.component';
 import { UserItemsComponent } from './components/profile/user-items/user-items.component';
+import { SignupComponent } from './signup/signup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { UserItemsComponent } from './components/profile/user-items/user-items.c
     RemarkTableComponent,
     CardPreviewComponent,
     UserItemsComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

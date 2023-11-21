@@ -6,12 +6,14 @@ const user = require('../user');
 /* POST new user - create new user */
 router.post('/new', async function (req, res, next) {
     try {
+        const data = req.body.params;
         const queryData = {
-            firstName: req.query.firstName,
-            lastName: req.query.lastName,
-            mail: req.query.mail,
-            phone: req.query.phone,
-            password: req.query.password
+            firstName: data.firstName,
+            lastName: data.lastName,
+            mail: data.mailaddress,
+            phone: data.phonenumber,
+            password: data.password,
+            passwordVerify: data.passwordVerify
         };
         res.json(await user.createUser(queryData));
     } catch (err) {

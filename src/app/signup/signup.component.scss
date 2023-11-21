@@ -1,0 +1,41 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-info-container {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.user-auth-container {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group input {
+    margin-bottom: 10px;
+    outline: none;
+    text-decoration: none;
+    border: none;
+    padding: 8px;
+    display: inline-block;
+    border-radius: 14px;
+    box-sizing: border-box;
+    margin-right: 16px;
+}
+.form-group label {
+    display: block;
+}
+.form-group .half {
+    display: inline-block;
+}
