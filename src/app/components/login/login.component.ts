@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserLoginService } from 'src/app/service/user-login.service';
+import { authService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +9,13 @@ import { UserLoginService } from 'src/app/service/user-login.service';
 })
 export class LoginComponent {
 
-  constructor (private authService: UserLoginService) {}
+  constructor (private userService: authService) {}
   onSubmit(f: NgForm) {
     if (f.valid) {
-      this.authService.logIn(f.value.credUser, f.value.credPass).subscribe(res => {
-        this.authService.loggedInUser = res
-        console.log(this.authService.loggedInUser);
-        if (this.authService.loggedInUser) {
+      this.userService.logIn(f.value.credUser, f.value.credPass).subscribe(res => {
+        this.userService.loggedInUser = res
+        console.log(this.userService.loggedInUser);
+        if (this.userService.loggedInUser) {
           console.log("valid login");
         }
         else {

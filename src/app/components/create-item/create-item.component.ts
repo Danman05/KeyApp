@@ -5,7 +5,7 @@ import { Item } from 'src/app/interface/item';
 import { ItemService } from 'src/app/service/item.service';
 import { Router } from '@angular/router';
 import { Helper } from '../helper';
-import { UserLoginService } from 'src/app/service/user-login.service';
+import { authService } from 'src/app/service/auth.service';
 @Component({
   selector: 'app-create-item',
   templateUrl: './create-item.component.html',
@@ -25,7 +25,7 @@ export class CreateItemComponent implements OnInit {
   imgLink: string = null!;
 
   constructor(private fileUploadService: ImageUploadService, private itemService: ItemService,
-    private loginService: UserLoginService, private router: Router) {
+    private loginService: authService, private router: Router) {
   }
 
   ngOnInit(): void {

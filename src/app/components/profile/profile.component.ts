@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemPreview } from 'src/app/interface/item-preview';
 import { ItemService } from 'src/app/service/item.service';
-import { UserLoginService } from 'src/app/service/user-login.service';
+import { authService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   ownedItems: ItemPreview[];
   reservedItems: ItemPreview[];
 
-  constructor(private itemService: ItemService, private authService: UserLoginService, private router: Router) { }
+  constructor(private itemService: ItemService, private authService: authService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
 
       const testLogins = {
         user: [
-          { mail: "Daniel@mail.com", password: "Kode1234!" },
+          { mail: "Danielspurrell@hotmail.com", password: "Kode1234!" },
           { mail: "IkkeDaniel@mail.com", password: "Kode1234!" }
         ]
       };

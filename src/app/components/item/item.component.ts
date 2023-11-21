@@ -4,7 +4,7 @@ import { Item } from 'src/app/interface/item';
 import { ItemFull } from 'src/app/interface/item-full';
 import { User } from 'src/app/interface/user';
 import { ItemService } from 'src/app/service/item.service';
-import { UserLoginService } from 'src/app/service/user-login.service';
+import { authService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-item',
@@ -25,7 +25,7 @@ export class ItemComponent implements OnInit {
   imageEndpoint: string = "http://localhost/key-app/uploads/";
 
   loggedUser: User
-  constructor(private route: ActivatedRoute, private itemService: ItemService, private userService: UserLoginService) {
+  constructor(private route: ActivatedRoute, private itemService: ItemService, private userService: authService) {
     this.loggedUser = userService.loggedInUser;
   }
   ngOnInit(): void {
