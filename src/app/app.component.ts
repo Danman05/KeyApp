@@ -1,23 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ItemService } from './service/item.service';
-import { Category } from './interface/category';
+import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   title = 'KeyApp';
-  itemCategories: Category[] | undefined
-
-  constructor(private itemService: ItemService) { }
-
-  ngOnInit(): void {
-
-    this.itemService.getCategories().subscribe(res => {
-      this.itemCategories = res.data
-    })
-  }
 }
