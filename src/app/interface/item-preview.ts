@@ -3,4 +3,5 @@ export interface ItemPreview {
     enhedTitel: string;
     enhedBeskrivelse: string;
     enhedBillede: string;
+    enhedKategoriId: number;
 }
