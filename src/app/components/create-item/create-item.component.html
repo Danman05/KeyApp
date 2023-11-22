@@ -22,8 +22,8 @@
             <textarea class="descriptionTxt" placeholder="beskrivelse" maxlength="1000" rows="8" cols="36"
                 [(ngModel)]="itemDescription"></textarea>
             <div class="submitBtn">
-                <button routerLink="">Tilbage til forsiden</button>
-                <button (click)="confirmCreate = true">Gå til bekræftelse</button>
+                <button class="defaultBtn" routerLink="">Tilbage til forsiden</button>
+                <button class="defaultBtn" (click)="confirmCreate = true">Gå til bekræftelse</button>
             </div>
         </div>
         <div class="remark-container">
@@ -43,8 +43,8 @@
         <h2>Beskrivelse</h2>
         <label class="descriptionTxt" >{{ itemDescription }}</label>
         <div class="submitBtn">
-            <button (click)="createItem()">Bekræft</button>
-            <button (click)="confirmCreate = false">Gå tilbage</button>
+            <button class="defaultBtn" (click)="createItem()">Bekræft</button>
+            <button class="defaultBtn" (click)="confirmCreate = false">Gå tilbage</button>
         </div>
         <app-remark-table [remarkString]="remarkJson"></app-remark-table>
     </div>

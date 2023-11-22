@@ -31,7 +31,7 @@
                     <input type="text" [(ngModel)]="dataRows[i].editable" (input)="valueChanged($event)" />
                 </td>
                 <td>
-                    <button name="deleteBtn" (click)="deleteTableRow(row.nonEditable)" tabindex="-1">x</button>
+                    <button class="defaultBtn" name="deleteBtn" (click)="deleteTableRow(row.nonEditable)" tabindex="-1">x</button>
                 </td>
             </tr>
         </tbody>

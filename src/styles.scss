@@ -15,7 +15,12 @@ body {
 .defaultBtn {
   padding: 12px;
   border-radius: 16px;
-  border: 1px solid blue;
-  background: linear-gradient(45deg, purple, blue);
+  background: linear-gradient(135deg, purple 30%, blue);
   color: white;
+  border: none;
+}
+
+/* Hover effect for Button */
+.defaultBtn:hover {
+  opacity: 60%;
 }

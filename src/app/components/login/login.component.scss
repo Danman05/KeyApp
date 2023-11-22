@@ -1,25 +1,22 @@
 .container {
     transform: translateY(50%);
     margin: 0 auto;
-    width: 50%;
+    width: 400px;
     padding: 20px;
 }
 
 input {
-    background: #d0d0d0;
     height: 20px;
     width: 50%;
-    color: #CCC;
     outline: none;
     border: none;
     border-radius: 5px;
     margin: 20px;
     padding: 15px;
-    color: #fff;
 }
 
 .input-form {
-    background: white;
+    border: 2px solid black;
     border-radius: 40px;
     box-shadow: rgba($color: #000, $alpha: 1.0);
 }
@@ -39,4 +36,4 @@ button {
     border-radius: 6px;
     padding: 20px;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, purple 30%, blue);}
+}

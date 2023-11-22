@@ -1,5 +1,5 @@
-<button (click)="previousGallary()" [disabled]="gallaryIndex === 0">Tilbage</button>
-<button (click)="nextGallary()" [disabled]="gallaryIndex > items.length">Flere</button>
+<button class="defaultBtn" (click)="previousGallary()" [disabled]="gallaryIndex === 0">Tilbage</button>
+<button class="defaultBtn" (click)="nextGallary()" [disabled]="gallaryIndex > items.length">Flere</button>
 
 <div class="card-container">
     <ng-container *ngFor="let item of items.slice(gallaryIndex, gallaryIndex + gallaryMaxItems)">
