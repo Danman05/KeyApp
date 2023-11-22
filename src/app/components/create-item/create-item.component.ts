@@ -56,11 +56,13 @@ export class CreateItemComponent implements OnInit {
   }
 
   uploadFile() {
-    if (this.file)
+    if (this.file && this.file.length <= 10)
       this.fileUploadService.upload(this.file).subscribe(res => {
-        console.log(res);
         this.buildImageJson(res);
       });
+    else
+      console.log("you cannot upload more than 10 files");
+
   }
 
   buildImageJson(filepaths: string[]) {
@@ -91,11 +93,10 @@ export class CreateItemComponent implements OnInit {
       enhedKategoriId: this.selectedCategory?.kategoriId!,
       enhedEjerId: this.loginService.loggedInUser.brugerId,
       reserveringStatusId: 1
-    }
+    };
     localStorage.removeItem('remarks');
     this.itemService.create(item).subscribe(res => {
-      console.log(res);
       this.router.navigate([""]);
-    })
+    });
   }
 }
