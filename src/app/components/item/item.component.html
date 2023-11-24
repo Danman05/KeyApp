@@ -33,24 +33,30 @@
   </table>
 
   <app-remark-table [remarkString]="remarkString"></app-remark-table>
-
   <ng-container *ngIf="loggedUser">
     <ng-container *ngIf="item.enhedEjer.mail !=loggedUser.mail">
-      <div *ngIf="item.statusBesked == 'Ledig'" class="reserve-container">
-
-        <div class="datepicker">
-          <label>Start date:</label>
-          <input type="date" [(ngModel)]="startDate">
+      <ng-container *ngIf="item.statusBesked == 'Ledig'">
+        <div class="reserve-container">
+      
+          <button class="defaultBtn" (click)="toggleReserveItem()">Book en reservering</button>
+          <div class="reservation-container" [hidden]="hideReservationDiv">Showing div
+            <div class="datepicker">
+              <label>Start date:</label>
+              <input type="date" [(ngModel)]="startDate">
+            </div>
+      
+            <div class="datepicker">
+              <label>End date:</label>
+              <input type="date" [(ngModel)]="endDate">
+            </div>
+            <button class="defaultBtn" (click)="reserveItem()">Book nu</button>
+            <button class="defaultBtn" (click)="toggleReserveItem()">Annuler</button>
+          </div>
         </div>
+        
 
-        <div class="datepicker">
-          <label>End date:</label>
-          <input type="date" [(ngModel)]="endDate">
-        </div>
 
-        <button class="defaultBtn" (click)="reserveItem()">Reserver</button>
-
-      </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>

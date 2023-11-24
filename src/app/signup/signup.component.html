@@ -1,11 +1,11 @@
-<div class="form-container">
+<div class="form-container center-container">
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" [ngFormOptions]="{updateOn: 'change'}">
         <div class="user-info-container">
             <div class="form-group">
                 <label for="first">Fornavn</label>
                 <input class="half" type="text" id="first" name="firstName" ngModel placeholder="John">
                 <label for="last">Efternavn</label>
-                <input class="half" type="text" id="last" name="lastName"ngModel placeholder="Doe">
+                <input class="half" type="text" id="last" name="lastName" ngModel placeholder="Doe">
             </div>
             <div class="form-group">
                 <label for="mail">Email adresse</label>
@@ -26,6 +26,10 @@
         </div>
         <div class="btn-container">
             <button class="defaultBtn" type="submit">Register</button>
+        </div>
+
+        <div class="flex-center-row">
+            <p>Har du allerede en konto? <a [routerLink]="['/log-ind']">Log ind</a>
         </div>
     </form>
 </div>

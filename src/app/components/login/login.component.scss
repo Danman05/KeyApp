@@ -1,8 +1,5 @@
 .container {
-    transform: translateY(50%);
-    margin: 0 auto;
     width: 400px;
-    padding: 20px;
 }
 
 input {
@@ -36,4 +33,9 @@ button {
     border-radius: 6px;
     padding: 20px;
     margin-bottom: 15px;
+}
+
+a {
+    color: #333;
+    margin: 6px;
 }

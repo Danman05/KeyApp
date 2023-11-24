@@ -1,9 +1,13 @@
-<div class="container">
+<div class="container center-container">
     <div class="input-form">
             <form #f="ngForm" (ngSubmit)="onSubmit(f)" [ngFormOptions]="{updateOn: 'change'}"> 
                 <input type="text" name="credUser" ngModel required placeholder="mail">
                 <input  type="password" name="credPass" ngModel required placeholder="password">
                 <button class="defaultBtn">Log ind</button>
+
+                <div class="flex-center-row">
+                    <p>Ny kunde? <a [routerLink]="['/register']">Registrer dig</a>
+                </div>
             </form>
     </div>
 </div>

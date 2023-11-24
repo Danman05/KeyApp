@@ -15,12 +15,27 @@ body {
 .defaultBtn {
   padding: 12px;
   border-radius: 16px;
-  background: linear-gradient(135deg, purple 30%, blue);
+  background: linear-gradient(135deg, green 30%, blue);
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 /* Hover effect for Button */
 .defaultBtn:hover {
   opacity: 60%;
+}
+
+.center-container {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.flex-center-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

@@ -24,6 +24,8 @@ export class ItemComponent implements OnInit {
   imageEndpoint: string = "http://localhost/key-app/uploads/";
 
   loggedUser: User
+
+  hideReservationDiv = true;
   constructor(private route: ActivatedRoute, private itemService: ItemService, private userService: authService) {
     this.loggedUser = userService.loggedInUser;
   }
@@ -44,6 +46,9 @@ export class ItemComponent implements OnInit {
       });
     }) 
    }
+  toggleReserveItem() {
+    this.hideReservationDiv = !this.hideReservationDiv
+  }
   reserveItem() {
     // Convert the string dates to Date objects
     const startDateObj = new Date(this.startDate);
