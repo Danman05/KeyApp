@@ -6,6 +6,8 @@ import { ItemService } from 'src/app/service/item.service';
 import { Router } from '@angular/router';
 import { Helper } from '../helper';
 import { authService } from 'src/app/service/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-create-item',
   templateUrl: './create-item.component.html',
@@ -25,7 +27,7 @@ export class CreateItemComponent implements OnInit {
   imgLink: string = null!;
 
   constructor(private fileUploadService: ImageUploadService, private itemService: ItemService,
-    private loginService: authService, private router: Router) {
+    private loginService: authService, private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class CreateItemComponent implements OnInit {
       });
     }
     else {
+      this.dialog.open(DialogComponent, { data: 'log ind før du kan oprette'})
       this.router.navigate(["log-ind"]);
     }
   }

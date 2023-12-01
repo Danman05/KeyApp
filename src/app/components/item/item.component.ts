@@ -4,6 +4,8 @@ import { ItemFull } from 'src/app/interface/item-full';
 import { User } from 'src/app/interface/user';
 import { ItemService } from 'src/app/service/item.service';
 import { authService } from 'src/app/service/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-item',
@@ -26,7 +28,9 @@ export class ItemComponent implements OnInit {
   loggedUser: User
 
   hideReservationDiv = true;
-  constructor(private route: ActivatedRoute, private itemService: ItemService, private userService: authService) {
+  actionMenu = true;
+  constructor(private route: ActivatedRoute, private itemService: ItemService, private userService: authService,
+     private dialog: MatDialog) {
     this.loggedUser = userService.loggedInUser;
   }
   ngOnInit(): void {
@@ -46,6 +50,9 @@ export class ItemComponent implements OnInit {
       });
     }) 
    }
+  toggleAction() {
+    this.actionMenu = !this.actionMenu;
+  }
   toggleReserveItem() {
     this.hideReservationDiv = !this.hideReservationDiv
   }
@@ -59,12 +66,18 @@ export class ItemComponent implements OnInit {
     if (endDateObj > startDateObj) 
       // Reservation logic when the dates are valid
       this.itemService.reservation(startDateObj, endDateObj , this.itemId, this.loggedUser.brugerId).subscribe(res => {
-        console.log(res);
+        this.dialog.open(DialogComponent, { data : 'Reserving oprettet'})
       });
       
     else 
     // Display an error message or handle the invalid date range
-      console.error('Invalid date range. End date must be greater than start date.');
-  
+      this.dialog.open(DialogComponent, { data : 'Ugyldig periode'})  
+  }
+
+  deleteItem(itemId: number) {
+    this.itemService.deleteItem(itemId).subscribe(res => { console.log(res);})
+  }
+  ediItem(item: ItemFull) {
+    console.log(item);
   }
 }

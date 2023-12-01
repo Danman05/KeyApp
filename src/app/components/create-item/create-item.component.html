@@ -6,12 +6,13 @@
             <input hidden id="file-uploader" class="form-control" type="file" multiple (change)="onChange($event)" accept="image/png, image/jpeg">
 
             <label id="file-upload-lbl" for="file-uploader">Tilføj billede</label>
-            <ul *ngIf="file.length > 0">
+            <ul *ngIf="file.length > 0 && file.length <= 10">
                 <p> Antal filer: {{file.length}}</p>
                 <li *ngFor="let item of file">
                     {{ item.name }}
                 </li>
             </ul>
+            
 
             <select (change)="categoryChange($event)" [(ngModel)]="selectedCategory.kategoriId">
                 <option value="0" disabled selected>Vælg kategori</option>

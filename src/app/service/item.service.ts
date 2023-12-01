@@ -35,4 +35,7 @@ export class ItemService {
     console.log("making res");
     return this.http.post<any>(`${this.endpoint}/reservation`, {startDate, expirationDate, itemId, userId});
   }
+  deleteItem(itemId: number) : Observable<any> {
+    return this.http.delete<any>(`${this.endpoint}/delete/${itemId}`);
+  }
 }

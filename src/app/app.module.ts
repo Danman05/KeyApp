@@ -16,11 +16,16 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { HttpClientModule } from '@angular/common/http';
 import { RemarkTableComponent } from './components/remark-table/remark-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule} from '@angular/material/button';
 import { CardPreviewComponent } from './components/front/card-preview/card-preview.component';
 import { UserItemsComponent } from './components/profile/user-items/user-items.component';
 import { SignupComponent } from './signup/signup.component';
+import { ItemOwnerActionComponent } from './components/item/item-owner-action/item-owner-action.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +41,8 @@ import { SignupComponent } from './signup/signup.component';
     CardPreviewComponent,
     UserItemsComponent,
     SignupComponent,
+    ItemOwnerActionComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,9 @@ import { SignupComponent } from './signup/signup.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { ItemPreview } from 'src/app/interface/item-preview';
 import { ItemService } from 'src/app/service/item.service';
 import { authService } from 'src/app/service/auth.service';
-
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,27 +15,14 @@ export class ProfileComponent implements OnInit {
   ownedItems: ItemPreview[];
   reservedItems: ItemPreview[];
 
-  constructor(private itemService: ItemService, private authService: authService, private router: Router) { }
+  constructor(private itemService: ItemService, private authService: authService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
     if (!this.authService.loggedInUser) {
-      // TESTING LOGIN
-      console.log("not logged in - using test login");
-      const loginAsUser = 0;
+      this.dialog.open(DialogComponent, {data: "Log ind for at tilgå din profil" })
+       this.router.navigate(['log-ind']);
 
-      const testLogins = {
-        user: [
-          { mail: "Danielspurrell@hotmail.com", password: "Kode1234!" },
-          { mail: "IkkeDaniel@mail.com", password: "Kode1234!" }
-        ]
-      };
-
-      this.authService.logIn(testLogins.user[loginAsUser].mail, testLogins.user[loginAsUser].password).subscribe(res => {
-        console.log(res);
-        this.authService.loggedInUser = res;
-        this.getItem(this.authService.loggedInUser.brugerId);
-      });
     }
     else {
         console.log("is logged in");

@@ -1,5 +1,3 @@
-<p>Profil</p>
-
 <ng-container *ngIf="ownedItems">
     <h1>Mine Enheder</h1>
     <app-card-preview (clickedOnCard)="itemInfoPage($event)" [items]="ownedItems"></app-card-preview>

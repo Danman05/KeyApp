@@ -39,7 +39,7 @@
         <div class="reserve-container">
       
           <button class="defaultBtn" (click)="toggleReserveItem()">Book en reservering</button>
-          <div class="reservation-container" [hidden]="hideReservationDiv">Showing div
+          <div class="reservation-container" [hidden]="hideReservationDiv">
             <div class="datepicker">
               <label>Start date:</label>
               <input type="date" [(ngModel)]="startDate">
@@ -53,10 +53,12 @@
             <button class="defaultBtn" (click)="toggleReserveItem()">Annuler</button>
           </div>
         </div>
-        
-
-
       </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="item.enhedEjer.mail == loggedUser.mail">
+      <app-item-owner-action (editEvent)="ediItem($event)" (deleteEvent)="deleteItem($event)" (toggleActionDialog)="toggleAction()" [item]="item" [hidden]="actionMenu"></app-item-owner-action>
+      <button class="defaultBtn" (click)="toggleAction()">Åbn menu</button>
     </ng-container>
   </ng-container>
 </div>
