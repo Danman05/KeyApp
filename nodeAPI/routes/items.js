@@ -72,4 +72,19 @@ router.post('/create', async function (req, res, next) {
         next(err);
     }
 });
+
+/* DELETE item. */
+router.delete('/delete/:itemId', async function (req, res, next) {
+    try {
+        console.log("reached delete method");
+        console.log("body:");
+        console.log(req.body);
+        console.log(req.params.itemId);
+        res.json(req.params.itemId)
+        // res.json(await items.createItem(req.body));
+    } catch (err) {
+        console.error(`Error while creating item `, err.message);
+        next(err);
+    }
+});
 module.exports = router;

@@ -5,7 +5,7 @@
     But the path is not stored anywhere on the database
     MyImage.Png will be deleted PERMANENTLY    
 */
-
+    
 const db = require('..\\db');
 const fs = require('fs');
 

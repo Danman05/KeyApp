@@ -29,21 +29,21 @@ async function authUser(userMail, plainTextPassword) {
         `);
 
     const data = helper.emptyOrRows(rows[0]);
-
-    const identity = {
-        password: data[0].identitetKodeord,
+    if (data) {
+        const identity = {
+            password: data[0].identitetKodeord,
+        }
+        const user = {
+            brugerId: data[0].brugerId,
+            fornavn: data[0].fornavn,
+            efternavn: data[0].efternavn,
+            mail: data[0].mail,
+            telefonnummer: data[0].telefonnummer,
+        }
+        if (await hasher.compareHash(plainTextPassword, identity.password))
+            return user;
     }
-    const user = {
-        brugerId: data[0].brugerId,
-        fornavn: data[0].fornavn,
-        efternavn: data[0].efternavn,
-        mail: data[0].mail,
-        telefonnummer: data[0].telefonnummer,
-    }
-    if (await hasher.compareHash(plainTextPassword, identity.password))
-        return user
-    else
-        return []
+    return null;
 }
 
 module.exports = {

@@ -16,13 +16,14 @@ const transporter = mailChecker.createTransport({
     }
 });
 try {
+    console.log("running script");
     fetchData();
 } catch (error) {
     console.log(`Error has occoured: ${error}`);
 }
 
 async function fetchData() {
-    await db.query(`
+    const data = await db.query(`
     SELECT vk.virtualKeyId, vk.reserveringId, vk.userId, 
     r.startDato, r.slutDato,
     e.enhedId, e.enhedTitel,
@@ -33,53 +34,50 @@ async function fetchData() {
     JOIN enhed AS e ON e.enhedId = r.enhedId
     JOIN bruger AS bOwner ON bOwner.brugerId = e.enhedEjerId
     JOIN bruger as bLender ON bLender.brugerId = vk.userId 
-`).then(res => {
+`);
 
-        const todayDate = new Date();
+    const todayDate = new Date();
 
-        var expiredItemList = [];
-        var count = 0;
+    var expiredItemList = [];
+    var count = 0;
 
-        res.forEach(item => {
+    data.forEach(item => {
+        const sqlDate = new Date(item.slutDato);
+        const timeDifference = sqlDate - todayDate;
+        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
-            const sqlDate = new Date(item.slutDato);
-            const timeDifference = sqlDate - todayDate;
-            const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-            if (daysDifference < 0) {
-                expiredItemList[count] = item;
-                count++;
-                console.log(`expired item added to list - KeyId: ${item.virtualKeyId}, reservationId: ${item.reserveringId}, enhedId: ${item.enhedId}`);
-            }
-            else if (daysDifference == 0) {
-                sendMail(item.lenderMail, item);
-                console.log(`sent mail to: ${item.lenderMail}`);
-            }
-        });
-
-        var virtualKeysId = [];
-        var reservationId = [];
-        var itemId = [];
-
-        expiredItemList.forEach(item => {
-            virtualKeysId.push(item.virtualKeyId);
-            reservationId.push(item.reserveringId);
-            itemId.push(item.enhedId);
-        });
-
-        // Join the IDs into comma-separated strings
-        var virtualKeysIdString = virtualKeysId.join(', ');
-        var reservationIdString = reservationId.join(', ');
-        var itemIdString = itemId.join(', ');
-
-        if (virtualKeysIdString && reservationIdString && itemIdString) {
-            db.query(`DELETE FROM virtualkey WHERE virtualKeyId IN (${virtualKeysIdString})`);
-            db.query(`DELETE FROM reservering WHERE reserveringId IN (${reservationIdString})`);
-            db.query(`UPDATE enhed as e SET e.reserveringStatusId = ${availableId} WHERE e.enhedId IN (${itemIdString})`);
+        if (daysDifference < 0) {
+            expiredItemList[count] = item;
+            count++;
+            console.log(`expired item added to list - KeyId: ${item.virtualKeyId}, reservationId: ${item.reserveringId}, enhedId: ${item.enhedId}`);
+        }
+        else if (daysDifference == 0) {
+            sendMail(item.lenderMail, item);
+            console.log(`sent mail to: ${item.lenderMail}`);
         }
     });
-}
 
+    var virtualKeysId = [];
+    var reservationId = [];
+    var itemId = [];
+
+    expiredItemList.forEach(item => {
+        virtualKeysId.push(item.virtualKeyId);
+        reservationId.push(item.reserveringId);
+        itemId.push(item.enhedId);
+    });
+
+    // Join the IDs into comma-separated strings
+    var virtualKeysIdString = virtualKeysId.join(', ');
+    var reservationIdString = reservationId.join(', ');
+    var itemIdString = itemId.join(', ');
+
+    if (virtualKeysIdString && reservationIdString && itemIdString) {
+        await db.query(`DELETE FROM virtualkey WHERE virtualKeyId IN (${virtualKeysIdString})`);
+        await db.query(`DELETE FROM reservering WHERE reserveringId IN (${reservationIdString})`);
+        await db.query(`UPDATE enhed as e SET e.reserveringStatusId = ${availableId} WHERE e.enhedId IN (${itemIdString})`);
+    }
+}
 function sendMail(mail, item) {
 
     const mailOptions = {
