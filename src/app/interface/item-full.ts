@@ -1,3 +1,4 @@
+import { Reservation } from "./reservation";
 import { User } from "./user";
 
 export interface ItemFull {
@@ -9,4 +10,5 @@ export interface ItemFull {
     enhedsType: string;
     enhedEjer: User;
     statusBesked: string;
+    reservering: Reservation;
 }

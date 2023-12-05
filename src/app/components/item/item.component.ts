@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemFull } from 'src/app/interface/item-full';
 import { User } from 'src/app/interface/user';
 import { ItemService } from 'src/app/service/item.service';
@@ -29,18 +29,19 @@ export class ItemComponent implements OnInit {
 
   hideReservationDiv = true;
   actionMenu = true;
-  constructor(private route: ActivatedRoute, private itemService: ItemService, private userService: authService,
+  constructor(private activatedRoute: ActivatedRoute, private route: Router, private itemService: ItemService, private userService: authService,
      private dialog: MatDialog) {
     this.loggedUser = userService.loggedInUser;
   }
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
       this.itemId = params["id"]; // Access the route parameter
 
       this.itemService.getFullItem(this.itemId).subscribe(res => {
         this.remarkString = res.item.enhedBemærkning;
         this.item = res.item;
-        this.item.enhedEjer = res.user
+        this.item.enhedEjer = res.user;
+        this.item.reservering = res.reservation;
         
         const itemImages = JSON.parse(res.item.enhedBillede);
         this.firstImage = this.imageEndpoint + itemImages.enhedBillede[0];
@@ -75,7 +76,16 @@ export class ItemComponent implements OnInit {
   }
 
   deleteItem(itemId: number) {
-    this.itemService.deleteItem(itemId).subscribe(res => { console.log(res);})
+    this.itemService.deleteItem(itemId).subscribe(res => 
+    { 
+        this.dialog.open(DialogComponent, { data: res.message})
+        .afterClosed()
+        .subscribe(() => {
+          if (res.deleted) {
+            this.route.navigate(['profil']); 
+          }
+        });
+    });
   }
   ediItem(item: ItemFull) {
     console.log(item);

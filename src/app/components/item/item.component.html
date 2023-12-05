@@ -30,6 +30,10 @@
       <th>Reservering status</th>
       <td>{{ item.statusBesked }}</td>
     </tr>
+    <tr *ngIf="item.statusBesked != 'Ledig'">
+      <th> Reserveret periode</th>
+      <td>{{ item.reservering.reserveringStart }} - {{ item.reservering.reserveringSlut }}</td>
+    </tr>
   </table>
 
   <app-remark-table [remarkString]="remarkString"></app-remark-table>
