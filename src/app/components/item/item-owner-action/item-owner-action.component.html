@@ -1,20 +1,25 @@
 <!-- Action dialog menu -->
 <div [hidden]="actionDialog" class="action-menu center-container flex-center-row">
-    <button class="close-btn" (click)="toggleDialog()">X</button>
-    <h3>Enhed Panel</h3>
-    <p>{{ item.enhedTitel }}</p>
+        <button class="close-btn" (click)="toggleDialog()">X</button>
+        <h3>Enhed Panel</h3>
+        <p>{{ item.enhedTitel }}</p>
 
-    <button class="defaultBtn warning-btn" (click)="toggleEdit()">Rediger</button>
-    <button class="defaultBtn danger-btn " (click)="toggleDelete()">Delete</button>
+        <button class="defaultBtn warning-btn" (click)="toggleEdit()">Rediger</button>
+        <button class="defaultBtn danger-btn " (click)="toggleDelete()">Delete</button>
 </div>
 
 <!-- Edit dialog -->
-<div class="center-container action-menu edit-dialog" [hidden]="editDialog">
+<div class="center-container action-menu edit-dialog" [hidden]="editDialog" *ngIf="categories">
         <button class="close-btn" (click)="toggleEdit()">X</button>
+        <select (change)="categoryChange($event)" [(ngModel)]="selectedCategory.kategoriId">
+                <option value="0" disabled selected>Vælg kategori</option>
+                <option *ngFor="let itemCategory of categories" value="{{itemCategory.kategoriId}}">{{itemCategory.enhedsType}}</option>
+        </select>
+        <input [value]="item.enhedTitel" #iTitle>
+        <input [value]="item.enhedBeskrivelse" #iDescription>
 
-edit dialog, make changes and return the new item to parent
-        <input [(ngModel)]="item.enhedTitel">
-        <button class="defaultBtn warning-btn" (click)="editItem()">Gem ændringer</button>
+        <button class="defaultBtn warning-btn" (click)="editItem(iTitle.value, iDescription.value)">Gem
+                ændringer</button>
         <button class="defaultBtn" (click)="toggleEdit()">Annuler</button>
 </div>
 
@@ -23,8 +28,8 @@ edit dialog, make changes and return the new item to parent
 <div class="center-container action-menu delete-dialog" [hidden]="deleteDialog">
         <button class="close-btn" (click)="toggleDelete()">X</button>
 
-    <h3>Vil du virkelig slette?</h3>
-    <p>{{ item.enhedTitel }}</p>
-    <button class="defaultBtn danger-btn" (click)="deleteItem()">Slet</button>
-    <button class="defaultBtn" (click)="toggleDelete()">Annuler</button>
+        <h3>Vil du virkelig slette?</h3>
+        <p>{{ item.enhedTitel }}</p>
+        <button class="defaultBtn danger-btn" (click)="deleteItem()">Slet</button>
+        <button class="defaultBtn" (click)="toggleDelete()">Annuler</button>
 </div>

@@ -24,9 +24,12 @@
                 <input type="password" id="passVerify" name="passwordVerify" ngModel placeholder="">
             </div>
         </div>
+        
         <div class="btn-container">
-            <button class="defaultBtn" type="submit">Register</button>
-        </div>
+                    <button type="submit" [disabled]="isLoading" class="defaultBtn">
+                        <span *ngIf="!isLoading">Register</span>
+                        <mat-spinner diameter="20" color="accent" *ngIf="isLoading"></mat-spinner>
+                    </button>        </div>
 
         <div class="flex-center-row">
             <p>Har du allerede en konto? <a [routerLink]="['/log-ind']">Log ind</a>

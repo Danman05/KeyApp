@@ -41,13 +41,10 @@
 
 .user-box {
   border-radius: 25px;
-  overflow: hidden;
   position: absolute;
-  left: 77%;
-  padding: 20px;
-  background: #dedede;
-  text-align: left;
-  
+  right: 5%;
+  padding: 7px;
+  background: linear-gradient(180deg, blue, transparent 95%);
   h2 {
     text-decoration: underline;
   }

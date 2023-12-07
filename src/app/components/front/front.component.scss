@@ -7,9 +7,19 @@ body {
     margin: 0;
 }
 
+.gallary-sort-container {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+}
+
 #select-box {
     padding: 8px;
+    position: fixed;
+    z-index: 1;
+    margin-top: 15px;
 }
-option  {
+
+option {
     padding: 6px;
 }

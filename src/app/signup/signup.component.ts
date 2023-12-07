@@ -13,12 +13,14 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
+  isLoading: boolean;
+
   validationError: boolean;
   constructor(private userService: authService, private dialog: MatDialog, private route: Router) { }
 
   onSubmit(f: NgForm) {
+    this.isLoading = true;
     this.validationError = false;
-
     // Check user input with a regex pattern
     Object.keys(f.value).forEach(item => {
       if (!this.validationError) {
@@ -26,7 +28,6 @@ export class SignupComponent {
         return;
       }
     });
-
     if (this.validationError)
       this.openErrorDialog('Fejl i validering: Indeholder ugyldige tegn');
 
@@ -39,6 +40,7 @@ export class SignupComponent {
         .subscribe(() => {
           this.userService.logIn(f.value['mailaddress'], f.value['password'])
             .subscribe(res => {
+              this.isLoading = false;
               this.userService.loggedInUser = res;
               this.route.navigate(['profil'])
             });

@@ -1,14 +1,15 @@
-<button class="defaultBtn" (click)="previousGallary()" [disabled]="gallaryIndex === 0">Tilbage</button>
-<button class="defaultBtn" (click)="nextGallary()" [disabled]="gallaryIndex > items.length">Flere</button>
+<div class="gallary-button-container">
+    <button class="defaultBtn" (click)="previousGallary()" [disabled]="gallaryIndex === 0">Tilbage</button>
+    <button class="defaultBtn" (click)="nextGallary()" [disabled]="gallaryIndex > items.length">Flere</button>
+</div>
 
 <div class="card-container">
     <ng-container *ngFor="let item of items.slice(gallaryIndex, gallaryIndex + gallaryMaxItems)">
         <mat-card (click)="itemClick(item)" class="card">
             <div class="image-container">
-                <img *ngIf="item.enhedBillede" class="item-picture"  [src]="getFirstImage(item.enhedBillede)"
-                (error)="onImageError($event)">
-                <img *ngIf="!item.enhedBillede" class="item-picture" 
-                src={{noImageUrl}}>
+                <img *ngIf="item.enhedBillede" class="item-picture" [src]="getFirstImage(item.enhedBillede)"
+                    (error)="onImageError($event)">
+                <img *ngIf="!item.enhedBillede" class="item-picture" src={{noImageUrl}}>
             </div>
             <mat-card-header>
                 <mat-card-title>{{ item.enhedTitel }}</mat-card-title>

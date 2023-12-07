@@ -11,6 +11,9 @@
 .edit-dialog {
     min-width: 300px;
     min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .delete-dialog {
@@ -19,8 +22,9 @@
 }
 
 button.close-btn {
-    position: absolute;
-    transform: translate(60px, -10px);
+    position: fixed;
+    right: 3%;
+    bottom: 77%;
 }
 .defaultBtn {
     margin: 8px;

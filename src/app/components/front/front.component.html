@@ -1,13 +1,16 @@
-<select onpointerenter="this.size = 5" onpointerleave="this.size = 1" id="select-box" #category
-    (change)="categoryChange(category.value)">
-    <option disabled selected>Vælg kategori</option>
-    <option value=0>Alle</option>
-    <option *ngFor="let item of categories" value="{{item.kategoriId}}">{{item.enhedsType}}</option>
-</select>
+<div class="gallary-sort-container">
+    <select onmouseenter="size = 5" onmouseleave="size = 0" id="select-box" #category
+        (change)="categoryChange(category.value)">
+        <option disabled selected>Vælg kategori</option>
+        <option value=0>Alle</option>
+        <option *ngFor="let item of categories" value="{{item.kategoriId}}">{{item.enhedsType}}</option>
+    </select>
+</div>
 
 <ng-container *ngIf="items.length > 0">
     <app-card-preview *ngIf="!usingSortedList" (clickedOnCard)="itemInfoPage($event)"
         [items]="items"></app-card-preview>
+
     <app-card-preview *ngIf="usingSortedList" (clickedOnCard)="itemInfoPage($event)"
         [items]="sortedItems"></app-card-preview>
 

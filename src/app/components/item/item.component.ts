@@ -30,7 +30,7 @@ export class ItemComponent implements OnInit {
   hideReservationDiv = true;
   actionMenu = true;
   constructor(private activatedRoute: ActivatedRoute, private route: Router, private itemService: ItemService, private userService: authService,
-     private dialog: MatDialog) {
+    private dialog: MatDialog) {
     this.loggedUser = userService.loggedInUser;
   }
   ngOnInit(): void {
@@ -42,15 +42,18 @@ export class ItemComponent implements OnInit {
         this.item = res.item;
         this.item.enhedEjer = res.user;
         this.item.reservering = res.reservation;
-        
-        const itemImages = JSON.parse(res.item.enhedBillede);
-        this.firstImage = this.imageEndpoint + itemImages.enhedBillede[0];
 
-        for (let i = 1; i < itemImages.enhedBillede.length; i++)
-          this.restImages[i - 1] = this.imageEndpoint + itemImages.enhedBillede[i]; 
+        if (res.item.enhedBillede) {
+
+          const itemImages = JSON.parse(res.item.enhedBillede);
+          this.firstImage = this.imageEndpoint + itemImages.enhedBillede[0];
+
+          for (let i = 1; i < itemImages.enhedBillede.length; i++)
+            this.restImages[i - 1] = this.imageEndpoint + itemImages.enhedBillede[i];
+        }
       });
-    }) 
-   }
+    })
+  }
   toggleAction() {
     this.actionMenu = !this.actionMenu;
   }
@@ -61,33 +64,39 @@ export class ItemComponent implements OnInit {
     // Convert the string dates to Date objects
     const startDateObj = new Date(this.startDate);
     const endDateObj = new Date(this.endDate);
-    
+
     // Check if the end date is greater than the start date
 
-    if (endDateObj > startDateObj) 
+    if (endDateObj > startDateObj)
       // Reservation logic when the dates are valid
-      this.itemService.reservation(startDateObj, endDateObj , this.itemId, this.loggedUser.brugerId).subscribe(res => {
-        this.dialog.open(DialogComponent, { data : 'Reserving oprettet'})
+      this.itemService.reservation(startDateObj, endDateObj, this.itemId, this.loggedUser.brugerId).subscribe(res => {
+        this.dialog.open(DialogComponent, { data: 'Reserving oprettet' })
       });
-      
-    else 
-    // Display an error message or handle the invalid date range
-      this.dialog.open(DialogComponent, { data : 'Ugyldig periode'})  
+
+    else
+      // Display an error message or handle the invalid date range
+      this.dialog.open(DialogComponent, { data: 'Ugyldig periode' })
   }
 
   deleteItem(itemId: number) {
-    this.itemService.deleteItem(itemId).subscribe(res => 
-    { 
-        this.dialog.open(DialogComponent, { data: res.message})
+    this.itemService.deleteItem(itemId).subscribe(res => {
+      this.dialog.open(DialogComponent, { data: res.message })
         .afterClosed()
         .subscribe(() => {
           if (res.deleted) {
-            this.route.navigate(['profil']); 
+            this.route.navigate(['profil']);
           }
         });
     });
   }
-  ediItem(item: ItemFull) {
-    console.log(item);
+  ediItem(data: any) {
+    this.itemService.editItem(data.item, data.categoryId.kategoriId).subscribe(res => {
+      this.dialog.open(DialogComponent, { data: res.message })
+        .afterClosed()
+        .subscribe(() => {
+        })
+      console.log(res);
+
+    })
   }
 }

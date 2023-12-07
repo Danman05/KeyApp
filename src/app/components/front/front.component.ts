@@ -10,7 +10,7 @@ import { ItemService } from 'src/app/service/item.service';
   styleUrls: ['./front.component.scss']
 })
 export class FrontComponent implements OnInit {
-
+  
   items: ItemPreview[] = [];
   sortedItems: ItemPreview[] = [];
 
