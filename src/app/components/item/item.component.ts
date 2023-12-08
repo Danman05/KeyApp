@@ -17,7 +17,7 @@ export class ItemComponent implements OnInit {
 
   startDate: Date;
   endDate: Date;
-
+  reservationTimeLeftDays: number;
   itemId: number;
   item: ItemFull;
   firstImage: string = "";
@@ -43,6 +43,9 @@ export class ItemComponent implements OnInit {
         this.item.enhedEjer = res.user;
         this.item.reservering = res.reservation;
 
+        const currentDate = new Date();
+        const endDate = new Date(this.item.reservering.reserveringSlut);
+        this.reservationTimeLeftDays = endDate.getDate() - currentDate.getDate();
         if (res.item.enhedBillede) {
 
           const itemImages = JSON.parse(res.item.enhedBillede);

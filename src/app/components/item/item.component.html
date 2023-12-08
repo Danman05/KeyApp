@@ -14,6 +14,7 @@
       <p>{{ item.enhedEjer.fornavn}} {{ item.enhedEjer.efternavn}}</p>
       <p class="user-box-info">{{ item.enhedEjer.mail}}</p>
       <p class="user-box-info">{{ item.enhedEjer.telefonnummer}}</p>
+      <hr>
     </div>
 
   </div>
@@ -30,10 +31,17 @@
       <th>Reservering status</th>
       <td>{{ item.statusBesked }}</td>
     </tr>
-    <tr *ngIf="item.statusBesked != 'Ledig'">
-      <th> Reserveret periode</th>
-      <td>{{ item.reservering.reserveringStart }} - {{ item.reservering.reserveringSlut }}</td>
-    </tr>
+    <ng-container *ngIf="item.statusBesked != 'Ledig'">
+      <tr>
+        <th> Reserveret periode</th>
+        <td>{{ item.reservering.reserveringStart }} - {{ item.reservering.reserveringSlut }}</td>
+      </tr>
+      <tr>
+        <th> Udløber om</th>
+        <td *ngIf="reservationTimeLeftDays <= 1">{{ reservationTimeLeftDays }} dag</td>
+        <td *ngIf="reservationTimeLeftDays >  1">{{ reservationTimeLeftDays }} dage</td>
+      </tr>
+    </ng-container>
   </table>
 
   <app-remark-table [remarkString]="remarkString"></app-remark-table>
